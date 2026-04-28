@@ -1,0 +1,10 @@
+Debug/
+Startup/
+*.ld
+*.launch
+.DS_Store
+.cproject
+.settings/
+.project
+syscalls.c
+sysmem.c
