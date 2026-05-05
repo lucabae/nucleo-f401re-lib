@@ -1,7 +1,24 @@
 #include "gpio.h"
-#include "utils.h"
 
 #define MAX_PINS 15
+
+
+GPIO_TypeDef *get_port_struct(char port){
+  switch(port){
+    case 'A':
+      return GPIOA;
+    case 'B':
+      return GPIOB;
+    case 'C':
+      return GPIOC;
+    case 'D':
+      return GPIOD;
+    case 'H':
+      return GPIOH;
+    default:
+      return NULL;
+  }
+}
 
 static int clean_gpio_port(char port){
   // Calculate bit_push

@@ -1,4 +1,3 @@
-#include "utils.h"
 #include "adc.h"
 #include "gpio.h"
 
@@ -8,7 +7,6 @@
 
 
 void init_adc(char port, uint8_t pin){
-
 	if(pin > MAX_PINS){
 		while(1){}; // Hard fault
 	}

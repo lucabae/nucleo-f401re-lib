@@ -17,6 +17,7 @@ DMA_Stream_TypeDef *get_dma(uint8_t dma, uint8_t stream){
 
 		return NULL;
 	}
+
 	else {
 		if(stream == 0) return DMA2_Stream0;
 		if(stream == 1) return DMA2_Stream1;
@@ -36,7 +37,6 @@ void init_dma(DMA_Config *cnf){
 	if(dma == NULL) return;
 	if((dma->CR & (1 << 0)) == 1) return; // Can't do changes while enabled
 
-
 	dma->CR = 	(cnf->channel << 25) |
 				(cnf->msize << 13) 	|
 				(cnf->psize << 11)	|
@@ -48,18 +48,12 @@ void init_dma(DMA_Config *cnf){
 				(cnf->htie << 3)	|
 				(cnf->teie << 2)	;
 
-
-
 	dma->NDTR = cnf->ndtr;
 	dma->PAR = cnf->par;
 	dma->M0AR = cnf->m0ar;
 	dma->M1AR = cnf->m1ar;
 	dma->FCR = 	(cnf->dmdis << 2) 	|
 				(cnf->fth << 0)		;
-
-
-
-
 }
 
 void dma_en(uint8_t dma, uint8_t stream_num, uint8_t status){
@@ -67,11 +61,8 @@ void dma_en(uint8_t dma, uint8_t stream_num, uint8_t status){
 		return;
 	}
 
-
 	DMA_Stream_TypeDef *stream = get_dma(dma, stream_num);
 	if(stream == NULL) return;
-
-
 
 	if(status == 0){
 		stream->CR &= ~(1 << 0);
