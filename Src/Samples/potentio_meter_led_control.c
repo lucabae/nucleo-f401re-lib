@@ -1,6 +1,14 @@
+/*
+
+This sample code gets the value of a potentio-meter connected
+to the A0 pin, and blinks the LED at a speed according to it.
+
+*/
+
 #include "gpio.h"
 #include "adc.h"
 #include <stdint.h>
+
 
 int main(void){
 
@@ -15,8 +23,9 @@ int main(void){
 
 	while(1){
 		uint16_t potentio = clean_adc_sampling();
-		// Minimum of 250 000 iterations: 2^18 ~= 250 000
+		// y(x) = 500x + 250 000
 		// Multiplying the potentio by 500 ~= 2^9
+		// Minimum of 250 000 iterations: 2^18 ~= 250 000
 		int delay = (potentio << 9) + (1U << 18);
 
 		gpio_write_pin('A', 5, 'S');
