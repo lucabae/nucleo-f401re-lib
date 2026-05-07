@@ -50,6 +50,7 @@ typedef struct {
 
 } DMA_Config;
 
+void init_dma(DMA_Config *cnf);
 
 
 #endif /* DMA_H_ */
