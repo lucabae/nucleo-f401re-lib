@@ -37,6 +37,7 @@ They can be obtained in here:
   <li>DMA</li>
   <li>ADC</li>
   <li>GPIO</li>
+  <li>USART</li>
 </ul>
 
 <h2>Sample code</h2>
@@ -49,7 +50,6 @@ They can be obtained in here:
   Incomming functionalities
 </h2>
 <ul>
-  <li>UART</li>
   <li>SPI</li>
   <li>I2C</li>
 </ul>
