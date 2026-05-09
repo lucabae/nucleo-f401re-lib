@@ -35,7 +35,16 @@ DMA_Stream_TypeDef *get_dma(uint8_t dma, uint8_t stream){
 void init_dma(DMA_Config *cnf){
 	DMA_Stream_TypeDef *dma = get_dma(cnf->dma, cnf->stream);
 	if(dma == NULL) return;
-	if((dma->CR & (1 << 0)) == 1) return; // Can't do changes while enabled
+	// Disable before configuration
+	dma->CR &= ~(1U << 0);
+	// Wait for it to be disabled
+	while(dma->CR & (1U << 0));
+
+	if(cnf->dma == 1){
+		RCC->AHB1ENR |= RCC_AHB1ENR_DMA1EN;
+	} else {
+		RCC->AHB1ENR |= RCC_AHB1ENR_DMA2EN;
+	}
 
 	dma->CR = 	(cnf->channel << 25) |
 				(cnf->msize << 13) 	|

@@ -12,6 +12,8 @@
 #include <stdint.h>
 #define NULL ((void*)0) // define NULL
 
+
+
 typedef struct {
     // Selection
     uint8_t dma;        // 1 or 2
@@ -23,8 +25,9 @@ typedef struct {
     					// 01: M to P
     					// 10: M to M
     					// 11: reserved
-    uint8_t msize;
-    uint8_t psize;
+    					// These must be in binary not decimal
+    uint8_t msize;// In bits
+    uint8_t psize;// In bits
     uint8_t minc; // 0 fixed 1 increment
     uint8_t pinc; // 0 fixed 1 increment
     uint8_t circ; // 0 disabled 1 enabled
@@ -51,6 +54,7 @@ typedef struct {
 } DMA_Config;
 
 void init_dma(DMA_Config *cnf);
+void dma_en(uint8_t dma, uint8_t stream_num, uint8_t status);
 
 
 #endif /* DMA_H_ */
