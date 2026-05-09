@@ -4,7 +4,9 @@
 #define MAX_PINS 15
 
 
-
+void init_adc_dma_mode(){
+	ADC1->CR2 |= (1U << 8) | (1U << 1) | (1U << 9);
+}
 
 void init_adc(char port, uint8_t pin){
 	if(pin > MAX_PINS){
@@ -30,6 +32,10 @@ void init_adc(char port, uint8_t pin){
 
 }
 
+void swstart(){
+	ADC1->CR2 |= ADC_CR2_SWSTART;
+}
+
 uint16_t clean_adc_sampling(){
   uint32_t sum = 0;
 
@@ -42,7 +48,7 @@ uint16_t clean_adc_sampling(){
 
 uint16_t adc_sampling(){
 	// Signal start of sampling
-	ADC1->CR2 |= (1U << 30); // SWSTART Register
+	swstart(); // SWSTART Register
 	// While SR flag EOC is not 1
 	while(((ADC1->SR)&(1U << 1)) == 0){};
 	// Return value

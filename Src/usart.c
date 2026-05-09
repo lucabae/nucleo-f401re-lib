@@ -17,6 +17,7 @@ void init_usart(USART_Cfg* cfg){
 	USART_TypeDef* usart = get_usart(cfg->USART_NUM);
 	if(usart == NULL) return;
 
+	// Activate in Clock
 	if(cfg->USART_NUM == 1){
 		RCC->APB2ENR |= (1U << 4);
 	} else if(cfg->USART_NUM == 6) {
