@@ -121,3 +121,15 @@ void gpio_write_pin(char port, int pin, char state){
     port_struct->BSRR = (1U << (pin + 16));
   }
 }
+
+void gpio_set_af(char port, uint8_t pin, uint8_t af){
+    GPIO_TypeDef* gpio = get_port_struct(port);
+    if(gpio == NULL) return;
+
+    // AFR[0] = AFRL (pins 0-7), AFR[1] = AFRH (pins 8-15)
+    uint8_t reg = pin / 8;
+    uint8_t offset = (pin % 8) * 4;  // Each pin occupies 4 bits
+
+    gpio->AFR[reg] &= ~(0xFU << offset);   // Clean
+    gpio->AFR[reg] |=  (af  << offset);
+}

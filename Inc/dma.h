@@ -26,8 +26,10 @@ typedef struct {
     					// 10: M to M
     					// 11: reserved
     					// These must be in binary not decimal
-    uint8_t msize;// In bits
-    uint8_t psize;// In bits
+    uint8_t msize;	// 00: byte
+    				// 01: 2 bytes
+    				// 10 : 4 bytes
+    uint8_t psize;// Same as MSIZE
     uint8_t minc; // 0 fixed 1 increment
     uint8_t pinc; // 0 fixed 1 increment
     uint8_t circ; // 0 disabled 1 enabled
