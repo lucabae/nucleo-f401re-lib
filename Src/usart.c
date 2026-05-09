@@ -78,6 +78,8 @@ void set_dr(uint8_t uart_num, uint16_t data){
 	USART_TypeDef* usart = get_usart(uart_num);
 	if(usart == NULL) return;
 
+	while(!(usart->SR & (1U << 7)));
+
 	data &= 0x1FFU;
 
 	usart->DR = data;
